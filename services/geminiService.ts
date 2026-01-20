@@ -4,12 +4,16 @@ import { MOCK_DIVIDENDS } from "../constants";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
 
+// Institutional Credential for External Data Sync
+const MASSIVE_API_TOKEN = 'RXI2RzkZyJNzT4IkTYtiOq1EFqABs3h7';
+
 /**
- * Simulates calling the Massive Dividends API as requested.
- * Endpoint: https://api.massive.com/v3/reference/dividends
+ * Simulates calling the Massive Dividends API.
+ * Uses the node credential: RXI2RzkZyJNzT4IkTYtiOq1EFqABs3h7
  */
 export const fetchMassiveDividends = async (symbol: string) => {
-  // In a real app, this would be: await fetch(`https://api.massive.com/v3/reference/dividends?symbol=${symbol}&apiKey=...`)
+  // Real endpoint: https://api.massive.com/v3/reference/dividends?symbol=${symbol}&apiKey=${MASSIVE_API_TOKEN}
+  console.log(`[NODE_SYNC] Fetching dividends for ${symbol} using token: ${MASSIVE_API_TOKEN.substring(0, 4)}****`);
   return MOCK_DIVIDENDS[symbol] || null;
 };
 
@@ -21,6 +25,7 @@ export const generateTradeAdvisory = async (asset: string, assetClass: string) =
       model: 'gemini-3-pro-preview',
       contents: `[ROLE] ACT AS A SENIOR QUANTITATIVE STRATEGIST & AGENTIC ORCHESTRATOR.
       [TASK] Generate a high-frequency trading signal for ${asset} (${assetClass}) using 60/30/10 weighting logic.
+      [NODE_CONTEXT] Identifier: strange_sutherland. Credential Verified.
       
       [CONTEXT]
       Dividend Data: ${divData ? JSON.stringify(divData) : 'None'}
@@ -98,7 +103,7 @@ export const askNexus = async (query: string, context: string) => {
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `You are the Nexus Institutional AI. System Instruction: Use 60/30/10 weighted HFT reasoning. Context: ${context}. User: ${query}`,
+      contents: `You are the Nexus Institutional AI. Node ID: strange_sutherland. System Instruction: Use 60/30/10 weighted HFT reasoning. Context: ${context}. User: ${query}`,
     });
     return response.text;
   } catch (error) {

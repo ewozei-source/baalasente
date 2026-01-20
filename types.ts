@@ -6,7 +6,15 @@ export enum DashboardTab {
   ETF_TRACKER = 'ETF_TRACKER',
   GEOPOLITICAL_RISK = 'GEOPOLITICAL_RISK',
   TACTICAL_ADVISORY = 'TACTICAL_ADVISORY',
-  STRATEGY_LAB = 'STRATEGY_LAB'
+  STRATEGY_LAB = 'STRATEGY_LAB',
+  SETTINGS = 'SETTINGS'
+}
+
+export interface ConnectivityStatus {
+  provider: string;
+  status: 'CONNECTED' | 'DISCONNECTED' | 'DEGRADED';
+  latency: number;
+  lastPing: string;
 }
 
 export interface DividendData {

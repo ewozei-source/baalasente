@@ -23,7 +23,9 @@ import {
   Wifi,
   Database,
   Lock,
-  FileCode
+  FileCode,
+  Settings as SettingsIcon,
+  Server
 } from 'lucide-react';
 import OptionsHeatmap from './components/OptionsHeatmap';
 import MinerScreener from './components/MinerScreener';
@@ -33,6 +35,7 @@ import TerminalChat from './components/TerminalChat';
 import TacticalAdvisory from './components/TacticalAdvisory';
 import MarketMap from './components/MarketMap';
 import StrategyLab from './components/StrategyLab';
+import Settings from './components/Settings';
 import { ALPHA_NEWS_STREAM, TOP_ASSETS } from './constants';
 
 const App: React.FC = () => {
@@ -57,7 +60,8 @@ const App: React.FC = () => {
   useEffect(() => {
     const logs = [
       "INITIALIZING NEXUS CORE...",
-      "AUTHENTICATING ELITE L3 CREDENTIALS...",
+      "AUTHENTICATING NODE: strange_sutherland...",
+      "VERIFYING CREDENTIAL: RXI2RzkZyJNzT4IkTYtiOq1EFqABs3h7...",
       "CONNECTING TO BINANCE LIQUIDITY POOL...",
       "SYNCING GLOBAL MACRO (FRED) PIPELINE...",
       "WAKING GEMINI-3 PRO NEURAL WEIGHTS...",
@@ -144,6 +148,7 @@ const App: React.FC = () => {
     { name: 'AI Infrastructure', tab: DashboardTab.MINER_SCREENER, icon: Cpu },
     { name: 'ETF Dominance', tab: DashboardTab.ETF_TRACKER, icon: Activity },
     { name: 'Geopolitical Risk', tab: DashboardTab.GEOPOLITICAL_RISK, icon: Globe },
+    { name: 'Node Settings', tab: DashboardTab.SETTINGS, icon: SettingsIcon },
   ];
 
   const currencySymbols: Record<CurrencyCode, string> = { USD: '$', EUR: '€', GBP: '£', JPY: '¥', AUD: 'A$' };
@@ -159,6 +164,7 @@ const App: React.FC = () => {
       case DashboardTab.MINER_SCREENER: return <MinerScreener />;
       case DashboardTab.ETF_TRACKER: return <ETFTracker />;
       case DashboardTab.GEOPOLITICAL_RISK: return <GeopoliticalDashboard />;
+      case DashboardTab.SETTINGS: return <Settings />;
       default: return <MarketMap />;
     }
   };
@@ -308,7 +314,7 @@ const App: React.FC = () => {
           <div className="flex items-center gap-6">
             <div className="hidden xl:flex gap-8 text-xs font-mono">
               <div className="flex flex-col">
-                <span className="text-slate-500 uppercase text-[9px] tracking-widest font-black">BTC / {baseCurrency}</span>
+                <span className="text-slate-500 uppercase text-[9px] tracking-widest font-black italic">strange_sutherland Node</span>
                 <span className={`font-bold tabular-nums transition-all duration-300 ${priceDirection === 'up' ? 'text-emerald-400' : 'text-rose-400'}`}>
                   {btcPrice > 0 ? `${currencySymbols[baseCurrency]}${(btcPrice * (baseCurrency === 'USD' ? 1 : 0.92)).toLocaleString()}` : 'SYNCING...'}
                 </span>
@@ -317,8 +323,8 @@ const App: React.FC = () => {
             
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-end mr-2">
-                 <span className="text-[9px] font-black text-indigo-500 uppercase tracking-widest">Elite Status</span>
-                 <span className="text-[10px] text-white font-mono uppercase">L3-Ultra</span>
+                 <span className="text-[9px] font-black text-indigo-500 uppercase tracking-widest">Active Core</span>
+                 <span className="text-[10px] text-white font-mono uppercase">Node v2.8</span>
               </div>
               <button onClick={() => setChatOpen(true)} className="hidden md:flex p-2 bg-indigo-600/10 hover:bg-indigo-600/20 text-indigo-400 rounded-lg items-center gap-2 text-xs font-bold px-4 transition-all border border-indigo-600/20 shadow-lg">
                 <Bot size={16} /> <span className="tracking-tight uppercase">AI TERMINAL</span>
@@ -343,8 +349,9 @@ const App: React.FC = () => {
              </div>
           </div>
           <div className="flex items-center gap-6 z-10 bg-[#020617] pl-6 text-slate-600 uppercase tracking-widest">
-            <span className="tabular-nums">NY CLOSE: 14:02:11</span>
-            <span className="text-indigo-500/80 font-bold tracking-[0.2em]">ELITE SUBSCRIPTION ACTIVE</span>
+             <Server size={10} className="text-indigo-500/50" />
+            <span className="tabular-nums uppercase">strange_sutherland: AUTH_READY</span>
+            <span className="text-indigo-500/80 font-bold tracking-[0.2em]">NODE v2.8.4</span>
           </div>
         </footer>
 
