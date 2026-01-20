@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { MOCK_DIVIDENDS } from "../constants";
 
@@ -12,7 +11,6 @@ const MASSIVE_API_TOKEN = 'RXI2RzkZyJNzT4IkTYtiOq1EFqABs3h7';
  * Uses the node credential: RXI2RzkZyJNzT4IkTYtiOq1EFqABs3h7
  */
 export const fetchMassiveDividends = async (symbol: string) => {
-  // Real endpoint: https://api.massive.com/v3/reference/dividends?symbol=${symbol}&apiKey=${MASSIVE_API_TOKEN}
   console.log(`[NODE_SYNC] Fetching dividends for ${symbol} using token: ${MASSIVE_API_TOKEN.substring(0, 4)}****`);
   return MOCK_DIVIDENDS[symbol] || null;
 };

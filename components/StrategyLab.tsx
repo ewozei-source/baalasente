@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Code, Terminal, Play, Save, ShieldAlert, Cpu, Database, Zap, FileCode } from 'lucide-react';
+import { Code, Terminal, Play, Save, ShieldAlert, Cpu, Database, Zap, FileCode, RefreshCcw } from 'lucide-react';
 
 const PYTHON_LOGIC = `import ccxt
 import pandas as pd
@@ -33,7 +32,6 @@ class NexusAgenticCore:
         # 1. Quant Scan (Gamma Squeeze)
         # 2. Sentiment Parser (Institutional weighting)
         # 3. Correlation Check (AI-Miner Lead-Lag)
-        # 4. JSON Output
         return json.dumps({
             "Confidence": 0.89,
             "Action": "BUY",
@@ -46,7 +44,7 @@ const StrategyLab: React.FC = () => {
 
   const simulateRun = () => {
     setIsRunning(true);
-    setLogs(prev => [...prev, "[RUN] NexusAgenticCore initializing...", "[RUN] Syncing Bollinger Band width...", "[RUN] Scraping Davo headlines..."]);
+    setLogs(prev => [...prev, "[RUN] NexusAgenticCore initializing...", "[RUN] Syncing Bollinger Band width...", "[RUN] Scraping news headlines..."]);
     
     setTimeout(() => {
       setLogs(prev => [...prev, "[RUN] Gamma Pivot detected at $92,400", "[RUN] AI-Miner Correlation: 0.82 (Lead)", "[SUCCESS] Signal Generated: BUY @ 91,240"]);
@@ -178,7 +176,7 @@ const StrategyLab: React.FC = () => {
             <div className="p-2 bg-slate-800/40 rounded border border-slate-800 text-[10px] text-slate-500 text-center uppercase">FRED_API</div>
             <div className="p-2 bg-slate-800/40 rounded border border-slate-800 text-[10px] text-slate-500 text-center uppercase">COINGLASS</div>
             <div className="p-2 bg-slate-800/40 rounded border border-slate-800 text-[10px] text-slate-500 text-center uppercase">GLASSNODE</div>
-            <div className="p-2 bg-slate-800/40 rounded border border-slate-800 text-[10px] text-slate-500 text-center uppercase">DAVOS_RSS</div>
+            <div className="p-2 bg-slate-800/40 rounded border border-slate-800 text-[10px] text-slate-500 text-center uppercase">NEWS_SYNC</div>
           </div>
         </div>
       </div>
@@ -187,6 +185,3 @@ const StrategyLab: React.FC = () => {
 };
 
 export default StrategyLab;
-
-// Re-importing RefreshCcw since it was used but not imported
-import { RefreshCcw } from 'lucide-react';
